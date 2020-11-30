@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Flames
 {
@@ -6,8 +7,8 @@ namespace Flames
     {
         public static void Main(string[] args)
         {
-            string name1 = args[0];
-            string name2 = args[1];
+            string name1 = "Qwerasdfzxcv";
+            string name2 = "Yuiopghjklvbnm";
             char[] name1Array = name1.ToLower().ToCharArray();
             char[] name2Array = name2.ToLower().ToCharArray();
             for (int i = 0; i < name1Array.Length; i++)
@@ -41,14 +42,27 @@ namespace Flames
             string finalString = name1 + name2;
             string flames = "FLAMES";
             int cutOffnumber = finalString.Length;
-            string stringholder = repeat(flames, 26);
-
-            for (int i = 0; i < 5; i++)
+            int removeCharIndex;
+            string firstHalf, secondHalf;
+            for (int i = 6; i > 1; i--)
             {
-                string toRemove = stringholder[cutOffnumber - 1].ToString();
-                stringholder = stringholder.Substring(cutOffnumber).Replace(toRemove, "");
+                removeCharIndex = (cutOffnumber % i);
+                if(removeCharIndex > 0)
+                {
+                    Console.WriteLine($"Character to be removed {flames[removeCharIndex - 1]}");
+                    firstHalf = flames.Substring(0, removeCharIndex - 1);
+                    secondHalf = flames.Substring(removeCharIndex);
+                    flames = secondHalf + firstHalf;
+                    Console.WriteLine($"Remaining characters {flames}");
+                }
+                else
+                {
+                    Console.WriteLine($"Character to be removed {flames[flames.Length -1]}");
+                    flames = flames.Substring(0, flames.Length - 1);
+                    Console.WriteLine($"Remaining characters {flames}");
+                }
+                
             }
-            Console.WriteLine(stringholder[0]);
             Console.ReadLine();
         }
 
